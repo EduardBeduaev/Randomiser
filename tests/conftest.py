@@ -1,12 +1,16 @@
-import pytest
+import os
+
+file_path = next((os.path.join(d, "main.py") for d in [os.getcwd(), os.path.dirname(os.getcwd())] if
+                  os.path.exists(os.path.join(d, "main.py"))), None)
+
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
-import os
+import pytest
 import subprocess
 from sqlalchemy import text
 from typing import Generator, Any
 from starlette.testclient import TestClient
-from main import app
+from app.main import app
 from session import get_db
 
 test_engine = create_engine(
